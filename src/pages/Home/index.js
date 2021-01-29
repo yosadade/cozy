@@ -12,7 +12,7 @@ import {
   ILCity3,
 } from '../../assets';
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -22,9 +22,21 @@ const Home = () => {
         <Label title="Popular Cities" />
         <Gap height={16} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <KosCard image={ILCity1} city="Jakarta" />
-          <KosCard image={ILCity2} city="Bandung" />
-          <KosCard image={ILCity3} city="Surabaya" />
+          <KosCard
+            image={ILCity1}
+            city="Jakarta"
+            onPress={() => navigation.navigate('KosDetail')}
+          />
+          <KosCard
+            image={ILCity2}
+            city="Bandung"
+            onPress={() => navigation.navigate('KosDetail')}
+          />
+          <KosCard
+            image={ILCity3}
+            city="Surabaya"
+            onPress={() => navigation.navigate('KosDetail')}
+          />
         </ScrollView>
         <Gap height={30} />
         <Label title="Recommended Place" />
@@ -35,18 +47,21 @@ const Home = () => {
             name="Kuretakeso Hott"
             price={52}
             location="Bandung, Germany"
+            onPress={() => navigation.navigate('KosDetail')}
           />
           <KosList
             image={IL2}
             name="Roemah Nenek"
             price={11}
             location="Seattle, Bogor"
+            onPress={() => navigation.navigate('KosDetail')}
           />
           <KosList
             image={IL3}
             name="Darrling How"
             price={20}
             location="Jakarta, Indonesia"
+            onPress={() => navigation.navigate('KosDetail')}
           />
         </ScrollView>
         <Label title="Tips & Guidance" />
@@ -75,6 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
     padding: 24,
+    paddingRight: 0,
   },
   title: {
     fontFamily: 'Poppins-Medium',

@@ -9,6 +9,13 @@ import ICFavouriteActive from './Icon_favourite_active.svg';
 import ICFavourite from './Icon_favourite.svg';
 import ICArrowRight from './Icon_right_outline.svg';
 import ICStarActive from './Icon_star_solid.svg';
+import ICLoveActive from './Icon_love_active.svg';
+import ICLove from './Icon_love.svg';
+import ICBack from './Icon_left_outline.svg';
+import ICBar from './001-bar-counter.svg';
+import ICBedRoom from './002-double-bed.svg';
+import ICLemari from './003-cupboard.svg';
+import ICLocation from './Icon_location_solid.svg';
 
 export {
   ICLogo,
@@ -22,4 +29,11 @@ export {
   ICFavourite,
   ICArrowRight,
   ICStarActive,
+  ICLoveActive,
+  ICLove,
+  ICBack,
+  ICBar,
+  ICBedRoom,
+  ICLemari,
+  ICLocation,
 };

@@ -7,6 +7,9 @@ import IL3 from './ilustration3.png';
 import ILCity1 from './city1.png';
 import ILCity2 from './city2.png';
 import ILCity3 from './city3.png';
+import ILDetail1 from './detail1.png';
+import ILDetail2 from './detail2.png';
+import ILDetail3 from './detail3.png';
 
 export {
   ILBottom,
@@ -18,4 +21,7 @@ export {
   ILCity1,
   ILCity2,
   ILCity3,
+  ILDetail1,
+  ILDetail2,
+  ILDetail3,
 };

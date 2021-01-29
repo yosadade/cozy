@@ -1,7 +1,17 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-const Button = ({onPress, title, width}) => {
+const Button = ({type, icon, onPress, title, width}) => {
+  if (type === 'icon') {
+    return (
+      <TouchableOpacity
+        style={styles.containerIcon}
+        activeOpacity={0.7}
+        onPress={onPress}>
+        {icon}
+      </TouchableOpacity>
+    );
+  }
   return (
     <TouchableOpacity
       style={styles.container(width)}
@@ -23,6 +33,14 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     width: width,
   }),
+  containerIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 40,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   title: {
     fontFamily: 'Poppins-Medium',
     fontSize: 18,

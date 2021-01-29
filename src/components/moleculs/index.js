@@ -1,7 +1,17 @@
 import BottomNavigator from './BottomNavigator';
-import Header from './Header';
 import KosCard from './KosCard';
 import KosList from './KosList';
 import TipsList from './TipsList';
+import Rating from './Rating';
+import RatingDetail from './RatingDetail';
+import FasilitiesDetail from './FasilitiesDetail';
 
-export {BottomNavigator, Header, KosCard, KosList, TipsList};
+export {
+  BottomNavigator,
+  KosCard,
+  KosList,
+  TipsList,
+  Rating,
+  RatingDetail,
+  FasilitiesDetail,
+};

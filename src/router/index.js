@@ -2,7 +2,15 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
-import {Splash, OnBoarding, Home, Massage, Card, Favourite} from '../pages';
+import {
+  Splash,
+  OnBoarding,
+  Home,
+  Massage,
+  Card,
+  Favourite,
+  KosDetail,
+} from '../pages';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +42,11 @@ const Router = () => {
       <Stack.Screen
         name="MainApp"
         component={MainApp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="KosDetail"
+        component={KosDetail}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

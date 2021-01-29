@@ -2,12 +2,22 @@ import React from 'react';
 import {StyleSheet, Text, Image, TouchableOpacity, View} from 'react-native';
 
 const KosCard = ({type, onPress, city, image}) => {
+  if (type === 'detail') {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={onPress}
+        style={styles.container(type)}>
+        <Image source={image} style={styles.image(type)} />
+      </TouchableOpacity>
+    );
+  }
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
-      style={styles.container}>
-      <Image source={image} style={styles.image} />
+      style={styles.container(type)}>
+      <Image source={image} style={styles.image(type)} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{city}</Text>
       </View>
@@ -18,20 +28,22 @@ const KosCard = ({type, onPress, city, image}) => {
 export default KosCard;
 
 const styles = StyleSheet.create({
-  container: {
-    width: 120,
-    height: 150,
+  container: (type) => ({
+    width: type === 'detail' ? 110 : 120,
+    height: type === 'detail' ? 80 : 150,
     borderRadius: 20,
     backgroundColor: '#F6F7F8',
-    marginRight: 20,
-  },
-  image: {
-    width: 120,
-    height: 102,
+    marginRight: type === 'detail' ? 18 : 20,
+  }),
+  image: (type) => ({
+    width: type === 'detail' ? 110 : 120,
+    height: type === 'detail' ? 80 : 102,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    borderBottomLeftRadius: type === 'detail' ? 20 : 0,
+    borderBottomRightRadius: type === 'detail' ? 20 : 0,
     backgroundColor: '#FFFFFF',
-  },
+  }),
   titleContainer: {
     flex: 1,
     justifyContent: 'center',
