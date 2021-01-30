@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    paddingTop: 42,
-    paddingBottom: 40,
+    paddingTop: 40,
+    // paddingBottom: 10,
   },
 });

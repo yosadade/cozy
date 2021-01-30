@@ -20,7 +20,7 @@ const OnBoarding = ({navigation}) => {
           <Button
             title="Explore Now"
             width={220}
-            onPress={() => navigation.replace('MainApp')}
+            onPress={() => navigation.replace('SignIn')}
           />
         </View>
       </View>

@@ -10,6 +10,8 @@ import {
   Card,
   Favourite,
   KosDetail,
+  SignUp,
+  SignIn,
 } from '../pages';
 
 const Stack = createStackNavigator();
@@ -47,6 +49,16 @@ const Router = () => {
       <Stack.Screen
         name="KosDetail"
         component={KosDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUp}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

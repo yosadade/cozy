@@ -16,6 +16,8 @@ import ICBar from './001-bar-counter.svg';
 import ICBedRoom from './002-double-bed.svg';
 import ICLemari from './003-cupboard.svg';
 import ICLocation from './Icon_location_solid.svg';
+import ICGoogle from './google.svg';
+import ICFacebook from './facebook.svg';
 
 export {
   ICLogo,
@@ -36,4 +38,6 @@ export {
   ICBedRoom,
   ICLemari,
   ICLocation,
+  ICGoogle,
+  ICFacebook,
 };
