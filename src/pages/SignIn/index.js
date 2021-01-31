@@ -2,8 +2,18 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Gap, TextInput, Button, Link} from '../../components';
 import {ICFacebook, ICGoogle} from '../../assets';
+import {useForm} from '../../utils';
 
 const SignIn = ({navigation}) => {
+  const [form, setForm] = useForm({
+    email: '',
+    password: '',
+  });
+
+  const onSignIn = () => {
+    console.log('email', form.email);
+    console.log('password', form.password);
+  };
   return (
     <View style={styles.page}>
       <View>
@@ -12,11 +22,21 @@ const SignIn = ({navigation}) => {
           Find your cozy house to stay and happy
         </Text>
         <Gap height={30} />
-        <TextInput placeholder="Your Email Address" />
+        <TextInput
+          title="Email"
+          placeholder="Your Email Address"
+          value={form.email}
+          onChangeText={(value) => setForm('email', value)}
+        />
         <Gap height={15} />
-        <TextInput placeholder="Your Password" />
+        <TextInput
+          title="Password"
+          placeholder="Your Password"
+          value={form.password}
+          onChangeText={(value) => setForm('password', value)}
+        />
         <Gap height={30} />
-        <Button title="Sign In" onPress={() => navigation.replace('MainApp')} />
+        <Button title="Sign In" onPress={onSignIn} />
         <Link
           title="Can't Login?"
           titleBtn="Click Here"
@@ -26,11 +46,11 @@ const SignIn = ({navigation}) => {
       <View style={styles.footer}>
         <Link title="- Or sign in With -" />
         <Gap height={15} />
-        <View styles={styles.button}>
+        <View style={styles.button}>
           <Button type="login" icon={<ICFacebook />} title="Facebook" />
           <Button type="login" icon={<ICGoogle />} title="Google" />
         </View>
-        <Gap weight={30} />
+        <Gap height={60} />
         <Link
           title="already have an account?"
           titleBtn="Sign Up"
@@ -65,5 +85,6 @@ const styles = StyleSheet.create({
   },
   button: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

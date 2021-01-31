@@ -5,7 +5,10 @@ import {
   ImageBackground,
   ScrollView,
   Text,
+  TouchableOpacity,
+  Linking,
 } from 'react-native';
+import {WebView} from 'react-native-webview';
 import {
   IL1,
   ICBack,
@@ -28,60 +31,96 @@ import {
 
 const KosDetail = ({navigation}) => {
   const [icon, setIcon] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const onFavourite = () => {
     setIcon(!icon);
   };
 
+  const onBook = () => {
+    Linking.openURL(
+      'whatsapp://send?text=Hello cozy house&phone=+62895811052010',
+    );
+  };
+
+  const onLocation = () => {
+    setModal(true);
+  };
+
+  const onBack = () => {
+    setModal(false);
+  };
+
   return (
-    <View style={styles.page}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <ImageBackground source={IL2} style={styles.image}>
-          <View style={styles.header}>
-            <Button
-              type="icon"
-              icon={<ICBack />}
-              onPress={() => navigation.goBack()}
-            />
-            <Button
-              type="icon"
-              icon={icon ? <ICLoveActive /> : <ICLove />}
-              onPress={onFavourite}
-            />
+    <>
+      <View style={styles.page}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <ImageBackground source={IL2} style={styles.image}>
+            <View style={styles.header}>
+              <Button
+                type="icon"
+                icon={<ICBack />}
+                onPress={() => navigation.goBack()}
+              />
+              <Button
+                type="icon"
+                icon={icon ? <ICLoveActive /> : <ICLove />}
+                onPress={onFavourite}
+              />
+            </View>
+          </ImageBackground>
+          <View style={styles.content}>
+            <RatingDetail />
+            <Gap height={30} />
+            <FasilitiesDetail />
+            <Gap height={30} />
+            <Label title="Photos" />
+            <Gap height={12} />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <KosCard type="detail" image={ILDetail1} />
+              <KosCard type="detail" image={ILDetail2} />
+              <KosCard type="detail" image={ILDetail3} />
+            </ScrollView>
+            <Gap height={30} />
+            <Label title="Location" />
+            <Gap height={12} />
+            <TouchableOpacity
+              style={styles.lcoation}
+              activeOpacity={0.7}
+              onPress={onLocation}>
+              <View>
+                <Text style={styles.titleLocation}>
+                  Jln. Kappan Sukses No. 20
+                </Text>
+                <Text style={styles.titleLocation}>Palembang</Text>
+              </View>
+              <View style={styles.iconLocation}>
+                <ICLocation />
+              </View>
+            </TouchableOpacity>
+            <View style={styles.button}>
+              <Button title="Book Now" onPress={onBook} />
+            </View>
           </View>
-        </ImageBackground>
-        <View style={styles.content}>
-          <RatingDetail />
-          <Gap height={30} />
-          <FasilitiesDetail />
-          <Gap height={30} />
-          <Label title="Photos" />
-          <Gap height={12} />
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <KosCard type="detail" image={ILDetail1} />
-            <KosCard type="detail" image={ILDetail2} />
-            <KosCard type="detail" image={ILDetail3} />
-          </ScrollView>
-          <Gap height={30} />
-          <Label title="Location" />
-          <Gap height={12} />
-          <View style={styles.lcoation}>
+        </ScrollView>
+      </View>
+      {modal && (
+        <View style={styles.webView}>
+          <View style={styles.headerWebView}>
+            <TouchableOpacity onPress={onBack}>
+              <ICBack />
+            </TouchableOpacity>
             <View>
-              <Text style={styles.titleLocation}>
-                Jln. Kappan Sukses No. 20
-              </Text>
-              <Text style={styles.titleLocation}>Palembang</Text>
-            </View>
-            <View style={styles.iconLocation}>
-              <ICLocation />
+              <Text style={styles.title}>Location</Text>
+              <Text style={styles.subTitle}>Mencari kosan yang cozy</Text>
             </View>
           </View>
-          <View style={styles.button}>
-            <Button title="Book Now" />
-          </View>
+
+          <Gap height={30} />
+          {/* <WebView source={{uri: 'https://reactnative.dev/'}} />; */}
         </View>
-      </ScrollView>
-    </View>
+      )}
+    </>
   );
 };
 
@@ -133,5 +172,28 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 40,
     // paddingBottom: 10,
+  },
+  webView: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#FFFFFF',
+    paddingTop: 24,
+  },
+  headerWebView: {
+    paddingHorizontal: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  title: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 24,
+    marginLeft: 24,
+    color: '#000000',
+  },
+  subTitle: {
+    fontFamily: 'Poppins-Light',
+    fontSize: 16,
+    marginLeft: 24,
+    color: '#82868E',
   },
 });
