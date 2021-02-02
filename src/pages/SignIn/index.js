@@ -6,19 +6,22 @@ import {Gap, TextInput, Button, Link} from '../../components';
 import {ICFacebook, ICGoogle} from '../../assets';
 import {useForm} from '../../utils';
 
-GoogleSignin.configure({
-  webClientId:
-    '927870616403-2s1g1sj90d45arjesid8taua5kabko5m.apps.googleusercontent.com',
-});
 const SignIn = ({navigation}) => {
   const [form, setForm] = useForm({
     email: '',
     password: '',
+    loaded: false,
+    userGoogleInfo: '',
   });
 
   useEffect(() => {
     // onGoogle();
-  }, []);
+    GoogleSignin.configure({
+      webClientId:
+        '927870616403-2s1g1sj90d45arjesid8taua5kabko5m.apps.googleusercontent.com',
+      offlineAccess: true,
+    });
+  });
 
   const onSignIn = () => {
     console.log('email', form.email);
@@ -26,34 +29,40 @@ const SignIn = ({navigation}) => {
   };
 
   const onGoogle = async () => {
-    const {idToken} = GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-    // Sign-in the user with the credential
     try {
-      const res = await auth().signInWithCredential(googleCredential);
-      console.log(res);
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      setForm('userGoogleInfo', userInfo);
+      setForm('loaded', true);
     } catch (err) {
-      return console.log('error', err);
+      console.log(err.message);
     }
   };
 
   async function onGoogleButtonPress() {
     // Get the users ID token
     const {idToken} = await GoogleSignin.signIn();
+    console.log('========================');
+    console.log(idToken);
 
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
+    auth()
+      .signInWithCredential(googleCredential)
+      .then((res) => console.log('berhasil'))
+      .catch((err) => console.log('error catch'));
   }
   return (
     <View style={styles.page}>
       <View>
-        <Text style={styles.title}>Sign In</Text>
+        {/* <Text style={styles.title}>Sign In</Text> */}
+        {form.loaded ? (
+          <Text style={styles.title}>{form.userGoogleInfo.user.name}</Text>
+        ) : (
+          <Text style={styles.title}>Sign In</Text>
+        )}
         <Text style={styles.subTitle}>
           Find your cozy house to stay and happy
         </Text>
