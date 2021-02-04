@@ -1,10 +1,16 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {GoogleSignin} from '@react-native-community/google-signin';
+import {StyleSheet, Text, View, Alert} from 'react-native';
+import {
+  GoogleSignin,
+  statusCodes,
+  GoogleSigninButton,
+} from '@react-native-community/google-signin';
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 import {Gap, TextInput, Button, Link} from '../../components';
 import {ICFacebook, ICGoogle} from '../../assets';
-import {useForm} from '../../utils';
+import {useForm, storeData, showMessage} from '../../utils';
+import {useDispatch} from 'react-redux';
 
 const SignIn = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -14,18 +20,37 @@ const SignIn = ({navigation}) => {
     userGoogleInfo: '',
   });
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    // onGoogle();
     GoogleSignin.configure({
       webClientId:
-        '927870616403-2s1g1sj90d45arjesid8taua5kabko5m.apps.googleusercontent.com',
-      offlineAccess: true,
+        '927870616403-6v6o93epdaij1lecdka0hk10srmut0cg.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+      offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+      forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
     });
   });
 
   const onSignIn = () => {
-    console.log('email', form.email);
-    console.log('password', form.password);
+    dispatch({type: 'SET_LOADING', value: true});
+    auth()
+      .signInWithEmailAndPassword(form.email, form.password)
+      .then((res) => {
+        dispatch({type: 'SET_LOADING', value: false});
+        database()
+          .ref(`users/${res.user.uid}/`)
+          .once('value')
+          .then((resDB) => {
+            if (resDB.val()) {
+              storeData('user', resDB.val());
+              navigation.replace('MainApp');
+            }
+          });
+      })
+      .catch((err) => {
+        dispatch({type: 'SET_LOADING', value: false});
+        showMessage(err.message);
+      });
   };
 
   const onGoogle = async () => {
@@ -39,21 +64,16 @@ const SignIn = ({navigation}) => {
     }
   };
 
-  async function onGoogleButtonPress() {
+  const onGoogleButtonPress = async () => {
     // Get the users ID token
     const {idToken} = await GoogleSignin.signIn();
-    console.log('========================');
-    console.log(idToken);
 
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
-    auth()
-      .signInWithCredential(googleCredential)
-      .then((res) => console.log('berhasil'))
-      .catch((err) => console.log('error catch'));
-  }
+    return auth().signInWithCredential(googleCredential);
+  };
   return (
     <View style={styles.page}>
       <View>
@@ -97,7 +117,7 @@ const SignIn = ({navigation}) => {
             type="login"
             icon={<ICGoogle />}
             title="Google"
-            onPress={onGoogle}
+            onPress={onGoogleButtonPress}
           />
         </View>
         <Gap height={60} />

@@ -5,6 +5,7 @@ import TipsList from './TipsList';
 import Rating from './Rating';
 import RatingDetail from './RatingDetail';
 import FasilitiesDetail from './FasilitiesDetail';
+import Loading from './Loading';
 
 export {
   BottomNavigator,
@@ -14,4 +15,5 @@ export {
   Rating,
   RatingDetail,
   FasilitiesDetail,
+  Loading,
 };
