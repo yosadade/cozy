@@ -10,6 +10,7 @@ import ILCity3 from './city3.png';
 import ILDetail1 from './detail1.png';
 import ILDetail2 from './detail2.png';
 import ILDetail3 from './detail3.png';
+import ILProfile from './profile_dummy.png';
 
 export {
   ILBottom,
@@ -24,4 +25,5 @@ export {
   ILDetail1,
   ILDetail2,
   ILDetail3,
+  ILProfile,
 };

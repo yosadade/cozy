@@ -1,6 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import {Gap, Label, KosCard, KosList, TipsList} from '../../components';
+import {StyleSheet, Text, View, ScrollView, Image} from 'react-native';
+import {
+  Gap,
+  Label,
+  KosCard,
+  KosList,
+  TipsList,
+  HomeProfile,
+} from '../../components';
 import {
   ILGuidelines,
   ILFairship,
@@ -16,8 +23,7 @@ const Home = ({navigation}) => {
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text style={styles.title}>Explore Now</Text>
-        <Text style={styles.subTitle}>Mencari kosan yang cozy</Text>
+        <HomeProfile />
         <Gap height={30} />
         <Label title="Popular Cities" />
         <Gap height={16} />
@@ -91,15 +97,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     padding: 24,
     paddingRight: 0,
-  },
-  title: {
-    fontFamily: 'Poppins-Medium',
-    fontSize: 24,
-    color: '#000000',
-  },
-  subTitle: {
-    fontFamily: 'Poppins-Light',
-    fontSize: 16,
-    color: '#82868E',
   },
 });

@@ -7,16 +7,11 @@ import {ICLogo} from '../../assets';
 const Splash = ({navigation}) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({type: 'SET_LOADING', value: true});
     const unsubscribe = auth().onAuthStateChanged((user) => {
       setTimeout(() => {
         if (user) {
-          // user lagi login
-          dispatch({type: 'SET_LOADING', value: false});
           navigation.replace('MainApp');
         } else {
-          // user logout
-          dispatch({type: 'SET_LOADING', value: false});
           navigation.replace('OnBoarding');
         }
       }, 2000);

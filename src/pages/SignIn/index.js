@@ -28,6 +28,7 @@ const SignIn = ({navigation}) => {
         '927870616403-6v6o93epdaij1lecdka0hk10srmut0cg.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
       forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
+      scopes: ['profile', 'email'],
     });
   });
 
@@ -49,13 +50,13 @@ const SignIn = ({navigation}) => {
       })
       .catch((err) => {
         dispatch({type: 'SET_LOADING', value: false});
-        showMessage(err.message);
+        showMessage(err);
       });
   };
 
   const onGoogle = async () => {
     try {
-      await GoogleSignin.hasPlayServices();
+      await GoogleSignin.hasPlaySersvices();
       const userInfo = await GoogleSignin.signIn();
       setForm('userGoogleInfo', userInfo);
       setForm('loaded', true);
@@ -64,16 +65,37 @@ const SignIn = ({navigation}) => {
     }
   };
 
-  const onGoogleButtonPress = async () => {
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
-  };
+  async function googleLogin({cancel, success}) {
+    try {
+      GoogleSignin.configure({
+        webClientId:
+          '927870616403-6v6o93epdaij1lecdka0hk10srmut0cg.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+        offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+        forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
+        scopes: ['profile', 'email'],
+      });
+      const data = await GoogleSignin.signIn();
+      const credential = auth.GoogleAuthProvider.credential(
+        data.idToken,
+        data.accessToken,
+      );
+      const firebaseUserCredential = await auth().signInWithCredential(
+        credential,
+      );
+      if (firebaseUserCredential) {
+        // setLoggedInGoogle(true);
+        console.log('success');
+      }
+      if (typeof success === 'function') {
+        success();
+      }
+    } catch (e) {
+      console.warn('GOOGLE ERROR', e);
+      if (typeof cancel === 'function') {
+        cancel();
+      }
+    }
+  }
   return (
     <View style={styles.page}>
       <View>
@@ -117,7 +139,7 @@ const SignIn = ({navigation}) => {
             type="login"
             icon={<ICGoogle />}
             title="Google"
-            onPress={onGoogleButtonPress}
+            onPress={googleLogin}
           />
         </View>
         <Gap height={60} />
