@@ -112,12 +112,19 @@ const KosDetail = ({navigation}) => {
             </TouchableOpacity>
             <View>
               <Text style={styles.title}>Location</Text>
-              <Text style={styles.subTitle}>Mencari kosan yang cozy</Text>
+              <Text style={styles.subTitle}>
+                {' '}
+                Jln. Kappan Sukses No. 20, Palembang
+              </Text>
             </View>
           </View>
-
           <Gap height={30} />
-          {/* <WebView source={{uri: 'https://reactnative.dev/'}} />; */}
+          <WebView
+            source={{
+              uri:
+                'https://www.google.co.id/maps/place/Palembang,+Kota+Palembang,+Sumatera+Selatan/@-2.9549663,104.6929235,12z/data=!3m1!4b1!4m5!3m4!1s0x2e3b75e8fc27a3e3:0x3039d80b220d0c0!8m2!3d-2.9760735!4d104.7754307',
+            }}
+          />
         </View>
       )}
     </>
