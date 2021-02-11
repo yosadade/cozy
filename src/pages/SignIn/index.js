@@ -128,12 +128,7 @@ const SignIn = ({navigation}) => {
   return (
     <View style={styles.page}>
       <View>
-        {/* <Text style={styles.title}>Sign In</Text> */}
-        {form.loaded ? (
-          <Text style={styles.title}>{form.userGoogleInfo.user.name}</Text>
-        ) : (
-          <Text style={styles.title}>Sign In</Text>
-        )}
+        <Text style={styles.title}>Sign In</Text>
         <Text style={styles.subTitle}>
           Find your cozy house to stay and happy
         </Text>

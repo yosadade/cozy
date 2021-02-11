@@ -17,7 +17,7 @@ const KosCard = ({type, onPress, city, image}) => {
       activeOpacity={0.7}
       onPress={onPress}
       style={styles.container(type)}>
-      <Image source={image} style={styles.image(type)} />
+      <Image source={{uri: image}} style={styles.image(type)} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{city}</Text>
       </View>

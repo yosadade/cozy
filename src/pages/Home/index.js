@@ -1,5 +1,6 @@
-import React from 'react';
-import {StyleSheet, Text, View, ScrollView, Image} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View, ScrollView, Image, Alert} from 'react-native';
+import database from '@react-native-firebase/database';
 import {
   Gap,
   Label,
@@ -20,6 +21,57 @@ import {
 } from '../../assets';
 
 const Home = ({navigation}) => {
+  const [recommended, setRecommended] = useState([]);
+  const [popularCities, setPopularCities] = useState([]);
+
+  useEffect(() => {
+    getPopularCities();
+    getRecommendedPlace();
+    // console.log(popularCities);
+  }, [getPopularCities]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getPopularCities = () => {
+    database()
+      .ref('kos_cities/')
+      .once('value')
+      .then((res) => {
+        if (res.val()) {
+          const data = res.val();
+          const filterData = data.filter((el) => el !== null);
+          setPopularCities(filterData);
+          console.log('========================1');
+          console.log(filterData);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getRecommendedPlace = () => {
+    database()
+      .ref('kos_cities')
+      .orderByChild('rating')
+      .limitToLast(3)
+      .once('value')
+      .then((res) => {
+        // const oldData = res.val();
+        // const data = [];
+        // Object.keys(oldData).map((key) => {
+        //   data.push({
+        //     id: key,
+        //     data: oldData(key),
+        //   });
+        // });
+        setRecommended(res);
+        console.log('res recomended', res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -28,7 +80,17 @@ const Home = ({navigation}) => {
         <Label title="Popular Cities" />
         <Gap height={16} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <KosCard
+          {popularCities?.map((item) => {
+            return (
+              <KosCard
+                key={item.id}
+                image={item.image}
+                city={item.name}
+                onPress={() => navigation.navigate('PopularCitiesDetail', item)}
+              />
+            );
+          })}
+          {/* <KosCard
             image={ILCity1}
             city="Jakarta"
             onPress={() => navigation.navigate('KosDetail')}
@@ -42,7 +104,7 @@ const Home = ({navigation}) => {
             image={ILCity3}
             city="Surabaya"
             onPress={() => navigation.navigate('KosDetail')}
-          />
+          /> */}
         </ScrollView>
         <Gap height={30} />
         <Label title="Recommended Place" />

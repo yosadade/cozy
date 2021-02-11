@@ -12,6 +12,7 @@ import {
   KosDetail,
   SignUp,
   SignIn,
+  PopularCitiesDetail,
 } from '../pages';
 
 const Stack = createStackNavigator();
@@ -59,6 +60,11 @@ const Router = () => {
       <Stack.Screen
         name="SignUp"
         component={SignUp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="PopularCitiesDetail"
+        component={PopularCitiesDetail}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

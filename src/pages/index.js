@@ -7,6 +7,7 @@ import Card from './Card';
 import KosDetail from './KosDetail';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import PopularCitiesDetail from './PopularCitiesDetail';
 
 export {
   Splash,
@@ -18,4 +19,5 @@ export {
   KosDetail,
   SignIn,
   SignUp,
+  PopularCitiesDetail,
 };
