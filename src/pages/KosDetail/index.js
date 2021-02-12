@@ -37,11 +37,11 @@ const KosDetail = ({navigation}) => {
     setIcon(!icon);
   };
 
-  const onBook = () => {
-    Linking.openURL(
-      'whatsapp://send?text=Hello cozy house&phone=+62895811052010',
-    );
-  };
+  // const onBook = () => {
+  //   Linking.openURL(
+  //     'whatsapp://send?text=Hello cozy house&phone=+62895811052010',
+  //   );
+  // };
 
   const onLocation = () => {
     setModal(true);
@@ -99,7 +99,10 @@ const KosDetail = ({navigation}) => {
               </View>
             </TouchableOpacity>
             <View style={styles.button}>
-              <Button title="Book Now" onPress={onBook} />
+              <Button
+                title="Book Now"
+                onPress={() => navigation.navigate('Chatting')}
+              />
             </View>
           </View>
         </ScrollView>

@@ -1,7 +1,18 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ICSend, ICSendActive} from '../../../assets';
 
-const Button = ({type, icon, onPress, title, width}) => {
+const Button = ({type, icon, onPress, title, width, disable}) => {
+  if (type === 'send') {
+    return (
+      <TouchableOpacity
+        style={styles.containerSend(disable)}
+        activeOpacity={0.7}
+        onPress={onPress}>
+        {disable ? <ICSend /> : <ICSendActive />}
+      </TouchableOpacity>
+    );
+  }
   if (type === 'login') {
     return (
       <TouchableOpacity
@@ -61,6 +72,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  containerSend: (disable) => ({
+    backgroundColor: disable ? '#F1F1F1' : '#5843BE',
+    borderRadius: 17,
+    padding: 9,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 13,
+  }),
   title: {
     fontFamily: 'Poppins-Medium',
     fontSize: 18,

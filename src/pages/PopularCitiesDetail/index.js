@@ -1,33 +1,23 @@
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import {ICBack, IL1, IL2, IL3} from '../../assets';
-import {Gap, Label, KosList} from '../../components';
+import React from 'react';
+import {StyleSheet, View, ScrollView} from 'react-native';
+import {IL1, IL2, IL3} from '../../assets';
+import {Gap, Label, KosList, Header} from '../../components';
 
 const PopularCitiesDetail = ({navigation, route}) => {
   console.log('route', route.params);
   const data = route.params;
   return (
     <View style={styles.page}>
+      <Header
+        back
+        title="Explore Now"
+        subTitle={`Mencari kos di kota ${data.name}`}
+        onPress={() => navigation.goBack()}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.headerWebView}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <ICBack />
-          </TouchableOpacity>
-          <View>
-            <Text style={styles.title}>Explore Now</Text>
-            <Text style={styles.subTitle}>Mencari Kos di Kota Yogyakarta</Text>
-          </View>
-        </View>
         <Gap height={30} />
         <Label title="Recommended Place" />
         <Gap height={16} />
-
         <KosList
           image={IL1}
           name="Kuretakeso Hott"
@@ -81,24 +71,7 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: 24,
-    paddingVertical: 0,
-  },
-  headerWebView: {
-    paddingTop: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  title: {
-    fontFamily: 'Poppins-Medium',
-    fontSize: 24,
-    marginLeft: 24,
-    color: '#000000',
-  },
-  subTitle: {
-    fontFamily: 'Poppins-Light',
-    fontSize: 16,
-    marginLeft: 24,
-    color: '#82868E',
+    padding: 24,
+    paddingBottom: 0,
   },
 });

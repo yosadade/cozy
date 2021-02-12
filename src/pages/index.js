@@ -8,6 +8,7 @@ import KosDetail from './KosDetail';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import PopularCitiesDetail from './PopularCitiesDetail';
+import Chatting from './Chatting';
 
 export {
   Splash,
@@ -20,4 +21,5 @@ export {
   SignIn,
   SignUp,
   PopularCitiesDetail,
+  Chatting,
 };

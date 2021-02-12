@@ -30,7 +30,9 @@ const TextInput = ({placeholder, title, ...restProps}) => {
 export default TextInput;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
   input: (border) => ({
     fontFamily: 'Poppins-Light',
     backgroundColor: '#F1F1F1',

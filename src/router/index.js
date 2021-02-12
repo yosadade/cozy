@@ -13,6 +13,7 @@ import {
   SignUp,
   SignIn,
   PopularCitiesDetail,
+  Chatting,
 } from '../pages';
 
 const Stack = createStackNavigator();
@@ -65,6 +66,11 @@ const Router = () => {
       <Stack.Screen
         name="PopularCitiesDetail"
         component={PopularCitiesDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Chatting"
+        component={Chatting}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

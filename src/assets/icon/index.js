@@ -18,6 +18,8 @@ import ICLemari from './003-cupboard.svg';
 import ICLocation from './Icon_location_solid.svg';
 import ICGoogle from './google.svg';
 import ICFacebook from './facebook.svg';
+import ICSend from './send.svg';
+import ICSendActive from './send_active.svg';
 
 export {
   ICLogo,
@@ -40,4 +42,6 @@ export {
   ICLocation,
   ICGoogle,
   ICFacebook,
+  ICSend,
+  ICSendActive,
 };
