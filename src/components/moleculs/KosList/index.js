@@ -6,9 +6,40 @@ import {
   View,
   ImageBackground,
 } from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {ICStarActive} from '../../../assets';
 
-const KosList = ({image, name, price, location, onPress}) => {
+const KosList = ({type, image, name, price, location, onPress}) => {
+  if (type === 'skeleton') {
+    return (
+      <SkeletonPlaceholder>
+        <SkeletonPlaceholder.Item
+          flexDirection="row"
+          alignItems="center"
+          marginBottom={30}>
+          <SkeletonPlaceholder.Item
+            width={130}
+            height={110}
+            marginRight={20}
+            borderRadius={20}
+          />
+          <SkeletonPlaceholder>
+            <SkeletonPlaceholder.Item
+              width={179}
+              height={25}
+              marginBottom={5}
+            />
+            <SkeletonPlaceholder.Item
+              width={110}
+              height={22}
+              marginBottom={16}
+            />
+            <SkeletonPlaceholder.Item width={150} height={19} />
+          </SkeletonPlaceholder>
+        </SkeletonPlaceholder.Item>
+      </SkeletonPlaceholder>
+    );
+  }
   return (
     <TouchableOpacity
       activeOpacity={0.7}

@@ -1,7 +1,24 @@
 import React from 'react';
 import {StyleSheet, Text, Image, TouchableOpacity, View} from 'react-native';
-
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 const KosCard = ({type, onPress, city, image}) => {
+  if (type === 'skeleton') {
+    return (
+      <SkeletonPlaceholder>
+        <SkeletonPlaceholder.Item
+          marginRight={20}
+          width={120}
+          height={150}
+          borderRadius={20}>
+          <SkeletonPlaceholder.Item
+            width={120}
+            height={150}
+            borderRadius={20}
+          />
+        </SkeletonPlaceholder.Item>
+      </SkeletonPlaceholder>
+    );
+  }
   if (type === 'detail') {
     return (
       <TouchableOpacity

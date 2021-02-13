@@ -34,6 +34,11 @@ const Router = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name="MainApp"
+        component={MainApp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="Splash"
         component={Splash}
         options={{headerShown: false}}
@@ -43,11 +48,7 @@ const Router = () => {
         component={OnBoarding}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="MainApp"
-        component={MainApp}
-        options={{headerShown: false}}
-      />
+
       <Stack.Screen
         name="KosDetail"
         component={KosDetail}

@@ -79,37 +79,58 @@ const Home = ({navigation}) => {
         <Gap height={30} />
         <Label title="Popular Cities" />
         <Gap height={16} />
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {popularCities?.map((item) => {
-            return (
-              <KosCard
-                key={item.id}
-                image={item.image}
-                city={item.name}
-                onPress={() => navigation.navigate('PopularCitiesDetail', item)}
-              />
-            );
-          })}
-          {/* <KosCard
-            image={ILCity1}
-            city="Jakarta"
-            onPress={() => navigation.navigate('KosDetail')}
-          />
-          <KosCard
-            image={ILCity2}
-            city="Bandung"
-            onPress={() => navigation.navigate('KosDetail')}
-          />
-          <KosCard
-            image={ILCity3}
-            city="Surabaya"
-            onPress={() => navigation.navigate('KosDetail')}
-          /> */}
-        </ScrollView>
+        {popularCities.length ? (
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {popularCities?.map((item) => {
+              return (
+                <KosCard
+                  key={item.id}
+                  image={item.image}
+                  city={item.name}
+                  onPress={() =>
+                    navigation.navigate('PopularCitiesDetail', item)
+                  }
+                />
+              );
+            })}
+          </ScrollView>
+        ) : (
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <KosCard type="skeleton" />
+          </ScrollView>
+        )}
+
         <Gap height={30} />
         <Label title="Recommended Place" />
         <Gap height={16} />
-        <ScrollView showsVerticalScrollIndicator={false}>
+        {popularCities.length <= 2 ? (
+          <KosList type="skeleton" />
+        ) : (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <KosList
+              image={IL1}
+              name="Kuretakeso Hott"
+              price={52}
+              location="Bandung, Germany"
+              onPress={() => navigation.navigate('KosDetail')}
+            />
+            <KosList
+              image={IL2}
+              name="Roemah Nenek"
+              price={11}
+              location="Seattle, Bogor"
+              onPress={() => navigation.navigate('KosDetail')}
+            />
+            <KosList
+              image={IL3}
+              name="Darrling How"
+              price={20}
+              location="Jakarta, Indonesia"
+              onPress={() => navigation.navigate('KosDetail')}
+            />
+          </ScrollView>
+        )}
+        {/* <ScrollView showsVerticalScrollIndicator={false}>
           <KosList
             image={IL1}
             name="Kuretakeso Hott"
@@ -131,7 +152,7 @@ const Home = ({navigation}) => {
             location="Jakarta, Indonesia"
             onPress={() => navigation.navigate('KosDetail')}
           />
-        </ScrollView>
+        </ScrollView> */}
         <Label title="Tips & Guidance" />
         <Gap height={16} />
         <ScrollView showsVerticalScrollIndicator={false}>
