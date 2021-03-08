@@ -1,22 +1,57 @@
 import React from 'react';
-import {StyleSheet, Text, Image, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  View,
+  ScrollView,
+} from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 const KosCard = ({type, onPress, city, image}) => {
   if (type === 'skeleton') {
     return (
-      <SkeletonPlaceholder>
-        <SkeletonPlaceholder.Item
-          marginRight={20}
-          width={120}
-          height={150}
-          borderRadius={20}>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal>
+        <SkeletonPlaceholder marginRight={20}>
           <SkeletonPlaceholder.Item
+            marginRight={20}
             width={120}
             height={150}
-            borderRadius={20}
-          />
-        </SkeletonPlaceholder.Item>
-      </SkeletonPlaceholder>
+            borderRadius={20}>
+            <SkeletonPlaceholder.Item
+              width={120}
+              height={150}
+              borderRadius={20}
+            />
+          </SkeletonPlaceholder.Item>
+        </SkeletonPlaceholder>
+        <SkeletonPlaceholder marginRight={20}>
+          <SkeletonPlaceholder.Item
+            marginRight={20}
+            width={120}
+            height={150}
+            borderRadius={20}>
+            <SkeletonPlaceholder.Item
+              width={120}
+              height={150}
+              borderRadius={20}
+            />
+          </SkeletonPlaceholder.Item>
+        </SkeletonPlaceholder>
+        <SkeletonPlaceholder marginRight={20}>
+          <SkeletonPlaceholder.Item
+            marginRight={20}
+            width={120}
+            height={150}
+            borderRadius={20}>
+            <SkeletonPlaceholder.Item
+              width={120}
+              height={150}
+              borderRadius={20}
+            />
+          </SkeletonPlaceholder.Item>
+        </SkeletonPlaceholder>
+      </ScrollView>
     );
   }
   if (type === 'detail') {

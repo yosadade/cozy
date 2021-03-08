@@ -88,7 +88,7 @@ export default ButtomNavigator;
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'transparent',
     paddingHorizontal: 24,
   },
   container: {

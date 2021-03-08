@@ -43,6 +43,10 @@ const SignUp = ({navigation}) => {
       });
   };
 
+  const onSignIn = () => {
+    navigation.navigate('SignIn');
+  };
+
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -96,7 +100,7 @@ const SignUp = ({navigation}) => {
         <Gap height={30} />
         <Button title="Sign In" onPress={onContinue} />
         <Gap weight={30} />
-        <Link title="Back to" titleBtn="Sign In" onPress={onContinue} />
+        <Link title="Back to" titleBtn="Sign In" onPress={onSignIn} />
       </ScrollView>
     </View>
   );

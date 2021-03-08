@@ -5,7 +5,7 @@ import {Header, Gap, MassageList} from '../../components';
 const Massage = ({navigation}) => {
   return (
     <View style={styles.page}>
-      <Header title="Messages" subTitle="Messages" />
+      <Header title="Messages" subTitle="Mencari Kosan yang Cozy" />
       <Gap height={30} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <MassageList

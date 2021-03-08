@@ -130,32 +130,11 @@ const Home = ({navigation}) => {
             />
           </ScrollView>
         )}
-        {/* <ScrollView showsVerticalScrollIndicator={false}>
-          <KosList
-            image={IL1}
-            name="Kuretakeso Hott"
-            price={52}
-            location="Bandung, Germany"
-            onPress={() => navigation.navigate('KosDetail')}
-          />
-          <KosList
-            image={IL2}
-            name="Roemah Nenek"
-            price={11}
-            location="Seattle, Bogor"
-            onPress={() => navigation.navigate('KosDetail')}
-          />
-          <KosList
-            image={IL3}
-            name="Darrling How"
-            price={20}
-            location="Jakarta, Indonesia"
-            onPress={() => navigation.navigate('KosDetail')}
-          />
-        </ScrollView> */}
         <Label title="Tips & Guidance" />
         <Gap height={16} />
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.tipsList}>
           <TipsList
             title="City Guidelines"
             subTitle="Updated 20 Apr"
@@ -179,6 +158,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
     padding: 24,
+    paddingBottom: 0,
     paddingRight: 0,
+  },
+  tipsList: {
+    paddingBottom: 24,
   },
 });
