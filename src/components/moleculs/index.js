@@ -9,6 +9,7 @@ import Loading from './Loading';
 import HomeProfile from './HomeProfile';
 import Header from './Header';
 import MassageList from './MassageList';
+import MassageBubble from './MassageBubble';
 
 export {
   BottomNavigator,
@@ -22,4 +23,5 @@ export {
   HomeProfile,
   Header,
   MassageList,
+  MassageBubble,
 };

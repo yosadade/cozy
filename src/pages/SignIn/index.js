@@ -28,9 +28,6 @@ const SignIn = ({navigation}) => {
     GoogleSignin.configure({
       webClientId:
         '927870616403-6v6o93epdaij1lecdka0hk10srmut0cg.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
-      offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-      forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
-      scopes: ['profile', 'email'],
     });
   });
 
@@ -83,25 +80,11 @@ const SignIn = ({navigation}) => {
     return auth().signInWithCredential(facebookCredential);
   };
 
-  const onGoogle = async () => {
-    try {
-      await GoogleSignin.hasPlaySersvices();
-      const userInfo = await GoogleSignin.signIn();
-      setForm('userGoogleInfo', userInfo);
-      setForm('loaded', true);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
   async function googleLogin({cancel, success}) {
     try {
       GoogleSignin.configure({
         webClientId:
           '927870616403-6v6o93epdaij1lecdka0hk10srmut0cg.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
-        offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-        forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
-        scopes: ['profile', 'email'],
       });
       const data = await GoogleSignin.signIn();
       const credential = auth.GoogleAuthProvider.credential(
@@ -122,6 +105,25 @@ const SignIn = ({navigation}) => {
       console.warn('GOOGLE ERROR', e);
       if (typeof cancel === 'function') {
         cancel();
+      }
+    }
+  }
+
+  async function signIn() {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      alert(JSON.stringify(userInfo));
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+        console.log('error');
       }
     }
   }
@@ -168,7 +170,7 @@ const SignIn = ({navigation}) => {
             type="login"
             icon={<ICGoogle />}
             title="Google"
-            onPress={googleLogin}
+            onPress={signIn}
           />
         </View>
         <Gap height={60} />
