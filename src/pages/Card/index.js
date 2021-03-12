@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import {ICProfile} from '../../assets';
+import {ILProfile} from '../../assets';
 import ItemListMenu from '../../components/moleculs/ItemListMenu';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,7 +21,7 @@ const Card = ({navigation}) => {
           activeOpacity={0.7}
           style={styles.borderPhoto}
           onPress={() => {}}>
-          <Image source={ICProfile} style={styles.photoContainer} />
+          <Image source={ILProfile} style={styles.photoContainer} />
         </TouchableOpacity>
         <Text style={styles.name}>yosada dede</Text>
         <Text style={styles.email}>masyosad@gmail.com</Text>
