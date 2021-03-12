@@ -10,7 +10,7 @@ import {
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {ICStarActive} from '../../../assets';
 
-const KosList = ({type, image, name, price, location, onPress}) => {
+const KosList = ({type, image, name, price, location, onPress, rating}) => {
   if (type === 'skeleton') {
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -108,7 +108,7 @@ const KosList = ({type, image, name, price, location, onPress}) => {
           <View style={styles.iconBadge}>
             <ICStarActive />
           </View>
-          <Text style={styles.titleBadge}>4/5</Text>
+          <Text style={styles.titleBadge}>{rating}/5</Text>
         </View>
       </ImageBackground>
       <View style={styles.titleContainer}>

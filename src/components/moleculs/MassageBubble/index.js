@@ -5,19 +5,21 @@ import {ILProfile} from '../../../assets';
 const MassageBubble = ({type, message, time}) => {
   if (type === 'kos owner') {
     return (
-      <View Style={styles.container(type)}>
-        <Image source={ILProfile} style={styles.image} />
-        <View>
-          <View style={styles.wrapperMessage(type)}>
-            <Text style={styles.message(type)}>{message}</Text>
+      <View Style={styles.container}>
+        <View style={{flexDirection: 'row'}}>
+          <Image source={ILProfile} style={styles.image} />
+          <View>
+            <View style={styles.wrapperMessage(type)}>
+              <Text style={styles.message(type)}>{message}</Text>
+            </View>
+            <Text style={styles.time(type)}>{time}</Text>
           </View>
-          <Text style={styles.time(type)}>{time}</Text>
         </View>
       </View>
     );
   }
   return (
-    <View Style={styles.container(type)}>
+    <View Style={styles.container}>
       <View style={styles.wrapperMessage(type)}>
         <Text style={styles.message(type)}>{message}</Text>
       </View>
@@ -29,14 +31,15 @@ const MassageBubble = ({type, message, time}) => {
 export default MassageBubble;
 
 const styles = StyleSheet.create({
-  container: (type) => ({
+  container: {
     marginBottom: 20,
-    flexDirection: type === 'kos owner' ? 'row' : null,
-  }),
+  },
   image: {
     width: 46,
     height: 46,
     borderRadius: 8,
+    top: 38,
+    marginRight: 10,
   },
   wrapperMessage: (type) => ({
     padding: 12,

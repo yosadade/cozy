@@ -27,7 +27,7 @@ const Card = ({navigation}) => {
         <Text style={styles.email}>masyosad@gmail.com</Text>
       </View>
       <View style={styles.itemList}>
-        <ItemListMenu label="Edit Profule" subTitle="Edit Profile" />
+        <ItemListMenu label="Edit Profile" subTitle="Edit Profile" />
         <ItemListMenu label="Language" subTitle="Avaible 3 Languages" />
         <ItemListMenu label="Rate App" subTitle="On Google Play Store" />
         <ItemListMenu label="Help Center" subTitle="Read our guidelines" />
