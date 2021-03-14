@@ -111,6 +111,7 @@ const Home = ({navigation}) => {
               image={IL1}
               name="Kuretakeso Hott"
               price={52}
+              rating={5}
               location="Bandung, Germany"
               onPress={() => navigation.navigate('KosDetail')}
             />
@@ -118,6 +119,7 @@ const Home = ({navigation}) => {
               image={IL2}
               name="Roemah Nenek"
               price={11}
+              rating={4}
               location="Seattle, Bogor"
               onPress={() => navigation.navigate('KosDetail')}
             />
@@ -125,6 +127,7 @@ const Home = ({navigation}) => {
               image={IL3}
               name="Darrling How"
               price={20}
+              rating={3}
               location="Jakarta, Indonesia"
               onPress={() => navigation.navigate('KosDetail')}
             />

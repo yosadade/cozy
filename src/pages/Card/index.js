@@ -1,11 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {ILProfile} from '../../assets';
 import ItemListMenu from '../../components/moleculs/ItemListMenu';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Modal} from '../../components';
 
 const Card = ({navigation}) => {
+  const [open, setOpen] = useState(true);
+
+  const onModal = () => {
+    setOpen(true);
+  };
+
+  const onCancel = () => {
+    setOpen(!open);
+  };
+
   const onSignOut = () => {
     auth()
       .signOut()
@@ -15,29 +26,41 @@ const Card = ({navigation}) => {
       });
   };
   return (
-    <View style={styles.page}>
-      <View style={styles.photo}>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.borderPhoto}
-          onPress={() => {}}>
-          <Image source={ILProfile} style={styles.photoContainer} />
-        </TouchableOpacity>
-        <Text style={styles.name}>yosada dede</Text>
-        <Text style={styles.email}>masyosad@gmail.com</Text>
+    <>
+      <View style={styles.page}>
+        <View style={styles.photo}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.borderPhoto}
+            onPress={() => {}}>
+            <Image source={ILProfile} style={styles.photoContainer} />
+          </TouchableOpacity>
+          <Text style={styles.name}>yosada dede</Text>
+          <Text style={styles.email}>masyosad@gmail.com</Text>
+        </View>
+        <View style={styles.itemList}>
+          <ItemListMenu
+            label="Edit Profile"
+            subTitle="Name, Address & Password"
+          />
+          <ItemListMenu label="Language" subTitle="Avaible 3 Languages" />
+          <ItemListMenu label="Rate App" subTitle="On Google Play Store" />
+          <ItemListMenu label="Help Center" subTitle="Read our guidelines" />
+          <ItemListMenu
+            label="Sign Out"
+            subTitle="Sign Out"
+            onPress={onModal}
+          />
+        </View>
       </View>
-      <View style={styles.itemList}>
-        <ItemListMenu label="Edit Profile" subTitle="Edit Profile" />
-        <ItemListMenu label="Language" subTitle="Avaible 3 Languages" />
-        <ItemListMenu label="Rate App" subTitle="On Google Play Store" />
-        <ItemListMenu label="Help Center" subTitle="Read our guidelines" />
-        <ItemListMenu
-          label="Sign Out"
-          subTitle="Sign Out"
-          onPress={onSignOut}
+      {open && (
+        <Modal
+          title="Apakah anda yakin akan keluar?"
+          onPressLeft={onSignOut}
+          onPressRight={onCancel}
         />
-      </View>
-    </View>
+      )}
+    </>
   );
 };
 

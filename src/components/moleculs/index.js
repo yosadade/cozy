@@ -10,6 +10,7 @@ import HomeProfile from './HomeProfile';
 import Header from './Header';
 import MassageList from './MassageList';
 import MassageBubble from './MassageBubble';
+import Modal from './Modal';
 
 export {
   BottomNavigator,
@@ -24,4 +25,5 @@ export {
   Header,
   MassageList,
   MassageBubble,
+  Modal,
 };

@@ -2,7 +2,26 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ICSend, ICSendActive} from '../../../assets';
 
-const Button = ({type, icon, onPress, title, width, disable}) => {
+const Button = ({
+  type,
+  icon,
+  onPress,
+  title,
+  width,
+  disable,
+  backgroundColor,
+  color,
+}) => {
+  if (type === 'modal') {
+    return (
+      <TouchableOpacity
+        style={styles.containerModal(backgroundColor)}
+        activeOpacity={0.7}
+        onPress={onPress}>
+        <Text style={styles.titleModal(color)}>{title}</Text>
+      </TouchableOpacity>
+    );
+  }
   if (type === 'send') {
     return (
       <TouchableOpacity
@@ -80,6 +99,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     top: 13,
   }),
+  containerModal: (backgroundColor) => ({
+    width: 120,
+    paddingVertical: 11,
+    borderRadius: 8,
+    backgroundColor: backgroundColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  }),
   title: {
     fontFamily: 'Poppins-Medium',
     fontSize: 18,
@@ -90,6 +118,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#82868E',
   },
+  titleModal: (color) => ({
+    fontFamily: 'Poppins-Light',
+    fontSize: 16,
+    color: color,
+  }),
   icon: {
     marginBottom: 3,
     marginRight: 10,
