@@ -2,7 +2,9 @@ import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {Gap, Button, Link, Header} from '../../components';
 
-const UploadPhoto = ({navigation}) => {
+const UploadPhoto = ({route, navigation}) => {
+  const {fullName, email} = route.params;
+
   const onContinue = () => {
     navigation.replace('MainApp');
   };
@@ -10,7 +12,6 @@ const UploadPhoto = ({navigation}) => {
   const onSignIn = () => {
     navigation.navigate('SignIn');
   };
-
   return (
     <View style={styles.page}>
       <Header title="Upload Photo" subTitle="Select a photo to upload" />
@@ -19,8 +20,8 @@ const UploadPhoto = ({navigation}) => {
           <Image style={styles.photo} />
           <Text style={styles.subTitle}>Add Photo</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>Hanidah Zakiya</Text>
-        <Text style={styles.subTitle}>hanidahzakiya@mail.com</Text>
+        <Text style={styles.title}>{fullName}</Text>
+        <Text style={styles.subTitle}>{email}</Text>
       </View>
       <View>
         <Gap height={30} />

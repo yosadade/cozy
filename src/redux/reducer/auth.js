@@ -3,7 +3,7 @@ const initialStateRegister = {
   email: '',
   phoneNumber: '',
   password: '',
-  password_confirmation: '',
+  confirm_password: '',
 };
 
 const initialStatePhoto = {
@@ -20,7 +20,7 @@ export const registerReducer = (state = initialStateRegister, action) => {
       email: action.value.email,
       phoneNumber: action.value.phoneNumber,
       password: action.value.password,
-      password_confirmation: action.value.password_confirmation,
+      confirm_password: action.value.confirm_password,
     };
   }
   return state;
