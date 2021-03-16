@@ -1,11 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import {Gap, TextInput, Button, Link, Loading} from '../../components';
+import {Gap, TextInput, Button, Link} from '../../components';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
-import {useForm, storeData} from '../../utils';
+import {useForm, storeData, showError} from '../../utils';
 import {useDispatch} from 'react-redux';
-import {showMessage} from 'react-native-flash-message';
 
 const SignUp = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -19,29 +18,38 @@ const SignUp = ({navigation}) => {
   const dispatch = useDispatch();
 
   const onContinue = () => {
-    // dispatch({type: 'SET_LOADING', value: true});
-    // auth()
-    //   .createUserWithEmailAndPassword(form.email, form.password)
-    //   .then((success) => {
-    //     dispatch({type: 'SET_LOADING', value: false});
-    //     setForm('reset');
-    //     const data = {
-    //       fullName: form.fullName,
-    //       email: form.email,
-    //       password: form.password,
-    //       uid: success.user.uid,
-    //     };
-    //     database()
-    //       .ref('users/' + success.user.uid + '/')
-    //       .set(data);
-    //     storeData('user', data);
-    //     navigation.navigate('MainApp', data);
-    //   })
-    //   .catch((error) => {
-    //     dispatch({type: 'SET_LOADING', value: false});
-    //     showMessage(error.message);
-    //   });
-    navigation.navigate('UploadPhoto');
+    if (form.email.length === 0 && form.fullName.length === 0) {
+      showError('Please complete your personal data !!');
+    } else if (form.password !== form.confirm_password) {
+      showError('Password and confirm password are not the same');
+    } else if (form.password.length < 6 && form.confirm_password.length < 6) {
+      showError('should be at least 6 characters !!');
+    } else if (form.confirm_password === form.password) {
+      dispatch({type: 'SET_LOADING', value: true});
+      auth()
+        .createUserWithEmailAndPassword(form.email, form.password)
+        .then((success) => {
+          dispatch({type: 'SET_LOADING', value: false});
+          setForm('reset');
+          const data = {
+            fullName: form.fullName,
+            email: form.email,
+            password: form.password,
+            uid: success.user.uid,
+          };
+          database()
+            .ref('users/' + success.user.uid + '/')
+            .set(data);
+
+          storeData('user', data);
+          navigation.replace('UploadPhoto', data);
+        })
+        .catch((error) => {
+          dispatch({type: 'SET_LOADING', value: false});
+          console.log(error.code);
+          showError(error.message);
+        });
+    }
   };
 
   const onSignIn = () => {
@@ -93,7 +101,7 @@ const SignUp = ({navigation}) => {
         <TextInput
           title="Confirm Password"
           placeholder="Confirm Password"
-          value={form.password}
+          value={form.confirm_password}
           onChangeText={(value) => {
             setForm('confirm_password', value);
           }}

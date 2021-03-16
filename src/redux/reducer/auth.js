@@ -9,7 +9,7 @@ const initialStateRegister = {
 const initialStatePhoto = {
   uri: '',
   name: '',
-  isUploadPhoto: '',
+  isUploadPhoto: false,
 };
 
 export const registerReducer = (state = initialStateRegister, action) => {
@@ -23,12 +23,21 @@ export const registerReducer = (state = initialStateRegister, action) => {
       password_confirmation: action.value.password_confirmation,
     };
   }
-  if (action.type === 'SET_ADDRESS') {
+  return state;
+};
+
+export const photoReducer = (state = initialStatePhoto, action) => {
+  if (action.type === 'SET_PHOTO') {
     return {
       ...state,
-      address: action.value.address,
-      city: action.value.city,
-      houseNumber: action.value.houseNumber,
+      uri: action.value.uri,
+      name: action.value.name,
+    };
+  }
+  if (action.type === 'SET_UPLOAD_PHOTO') {
+    return {
+      ...state,
+      isUploadPhoto: action.value.isUploadPhoto,
     };
   }
   return state;

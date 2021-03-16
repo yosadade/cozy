@@ -1,9 +1,19 @@
-import {showMessage as showToast} from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 
-export const showMessage = (message, type) => {
-  showToast({
+export const showError = (message) => {
+  showMessage({
     message: message,
-    type: type === 'success' ? 'success' : 'danger',
-    backgroundColor: type === 'success' ? '#1ABC9C' : '#D9435E',
+    type: 'default',
+    backgroundColor: '#D9435E',
+    color: '#FFFFFF',
+  });
+};
+
+export const showSuccess = (message) => {
+  showMessage({
+    message: message,
+    type: 'default',
+    backgroundColor: '#1ABC9C',
+    color: '#FFFFFF',
   });
 };
