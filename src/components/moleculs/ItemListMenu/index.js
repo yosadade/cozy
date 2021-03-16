@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   label: {
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: 'Poppins-Regular',
     color: '#020202',
   },
   subTitle: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'Poppins-Light',
     color: '#7D8797',
   },

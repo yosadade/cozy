@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
-import {Header, Gap, MassageList, KosList} from '../../components';
+import {Header, Gap, KosList} from '../../components';
 import {IL1, IL2, IL3} from '../../assets';
 
 const Favourite = ({navigation}) => {
@@ -45,9 +45,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
     padding: 24,
-    paddingHorizontal: 0,
-  },
-  content: {
     paddingHorizontal: 24,
   },
 });

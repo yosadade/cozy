@@ -14,6 +14,7 @@ import {
   SignIn,
   PopularCitiesDetail,
   Chatting,
+  UploadPhoto,
 } from '../pages';
 
 const Stack = createStackNavigator();
@@ -34,13 +35,13 @@ const Router = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="MainApp"
-        component={MainApp}
+        name="Splash"
+        component={Splash}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Splash"
-        component={Splash}
+        name="MainApp"
+        component={MainApp}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -72,6 +73,11 @@ const Router = () => {
       <Stack.Screen
         name="Chatting"
         component={Chatting}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UploadPhoto"
+        component={UploadPhoto}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

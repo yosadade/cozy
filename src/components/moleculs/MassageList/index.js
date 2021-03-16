@@ -21,7 +21,6 @@ export default MassageList;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
     flexDirection: 'row',
     marginBottom: 24,
   },

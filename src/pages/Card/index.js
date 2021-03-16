@@ -35,8 +35,8 @@ const Card = ({navigation}) => {
             onPress={() => {}}>
             <Image source={ILProfile} style={styles.photoContainer} />
           </TouchableOpacity>
-          <Text style={styles.name}>yosada dede</Text>
-          <Text style={styles.email}>masyosad@gmail.com</Text>
+          <Text style={styles.name}>Hanidah Zakiya</Text>
+          <Text style={styles.email}>hanidahzakiya@mail.com</Text>
         </View>
         <View style={styles.itemList}>
           <ItemListMenu

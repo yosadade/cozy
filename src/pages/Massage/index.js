@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
     padding: 24,
-    paddingHorizontal: 0,
+    paddingHorizontal: 24,
   },
   messages: {
     paddingHorizontal: 24,

@@ -19,28 +19,29 @@ const SignUp = ({navigation}) => {
   const dispatch = useDispatch();
 
   const onContinue = () => {
-    dispatch({type: 'SET_LOADING', value: true});
-    auth()
-      .createUserWithEmailAndPassword(form.email, form.password)
-      .then((success) => {
-        dispatch({type: 'SET_LOADING', value: false});
-        setForm('reset');
-        const data = {
-          fullName: form.fullName,
-          email: form.email,
-          password: form.password,
-          uid: success.user.uid,
-        };
-        database()
-          .ref('users/' + success.user.uid + '/')
-          .set(data);
-        storeData('user', data);
-        navigation.navigate('MainApp', data);
-      })
-      .catch((error) => {
-        dispatch({type: 'SET_LOADING', value: false});
-        showMessage(error.message);
-      });
+    // dispatch({type: 'SET_LOADING', value: true});
+    // auth()
+    //   .createUserWithEmailAndPassword(form.email, form.password)
+    //   .then((success) => {
+    //     dispatch({type: 'SET_LOADING', value: false});
+    //     setForm('reset');
+    //     const data = {
+    //       fullName: form.fullName,
+    //       email: form.email,
+    //       password: form.password,
+    //       uid: success.user.uid,
+    //     };
+    //     database()
+    //       .ref('users/' + success.user.uid + '/')
+    //       .set(data);
+    //     storeData('user', data);
+    //     navigation.navigate('MainApp', data);
+    //   })
+    //   .catch((error) => {
+    //     dispatch({type: 'SET_LOADING', value: false});
+    //     showMessage(error.message);
+    //   });
+    navigation.navigate('UploadPhoto');
   };
 
   const onSignIn = () => {
@@ -98,7 +99,7 @@ const SignUp = ({navigation}) => {
           }}
         />
         <Gap height={30} />
-        <Button title="Sign In" onPress={onContinue} />
+        <Button title="Sign Up" onPress={onContinue} />
         <Gap weight={30} />
         <Link title="Back to" titleBtn="Sign In" onPress={onSignIn} />
       </ScrollView>
