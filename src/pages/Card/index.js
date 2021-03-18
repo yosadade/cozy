@@ -1,13 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {ILProfile} from '../../assets';
 import ItemListMenu from '../../components/moleculs/ItemListMenu';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Modal} from '../../components';
+import {getData} from '../../utils';
 
 const Card = ({navigation}) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [profile, seProfile] = useState();
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    getData('user')
+      .then((res) => {
+        console.log(res);
+        setFullName(res.fullName);
+        setEmail(res.email);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const onModal = () => {
     setOpen(true);
@@ -35,8 +51,8 @@ const Card = ({navigation}) => {
             onPress={() => {}}>
             <Image source={ILProfile} style={styles.photoContainer} />
           </TouchableOpacity>
-          <Text style={styles.name}>Hanidah Zakiya</Text>
-          <Text style={styles.email}>hanidahzakiya@mail.com</Text>
+          <Text style={styles.name}>{fullName}</Text>
+          <Text style={styles.email}>{email}</Text>
         </View>
         <View style={styles.itemList}>
           <ItemListMenu

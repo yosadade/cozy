@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import {ILProfile} from '../../../assets';
+import {getData} from '../../../utils';
 
 const HomeProfile = () => {
+  const [profile, setProfile] = useState(ILProfile);
+  useEffect(() => {
+    getData('user').then((res) => {
+      const data = res;
+      data.photo = {uri: res.photo};
+      setProfile(res);
+      console.log(res);
+    });
+  }, []);
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>Explore Now</Text>
         <Text style={styles.subTitle}>Mencari kosan yang cozy</Text>
       </View>
-      <Image source={ILProfile} style={styles.image} />
+      <Image source={profile} style={styles.image} />
     </View>
   );
 };
