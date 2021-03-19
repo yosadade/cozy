@@ -8,19 +8,13 @@ import {showError, storeData} from '../../utils';
 const UploadPhoto = ({route, navigation}) => {
   const {fullName, email, uid} = route.params;
   const [photo, setPhoto] = useState('');
-  const [photoForDB, setPhotoForDB] = useState('');
 
   const uploadAndContinue = () => {
     database()
       .ref('users/' + uid + '/')
-      .update({photo: photoForDB});
-
-    const data = route.params;
-    data.photo = photoForDB;
-
-    storeData('user', data);
-
-    console.log(data);
+      .update({photo: photo});
+    storeData('photo', photo);
+    console.log(photo);
     navigation.replace('MainApp');
   };
 
@@ -40,13 +34,15 @@ const UploadPhoto = ({route, navigation}) => {
           showError('Anda tidak memilih photo');
         } else {
           const source = {uri: response.uri};
+          console.log('res', response);
           const dataImage = {
             uri: response.uri,
             type: response.type,
             name: response.fileName,
           };
-          setPhotoForDB(`data:${response.type};base64, ${response.data}`);
+          console.log('data image', dataImage);
           setPhoto(source);
+
           // dispatch({type: 'SET_PHOTO', value: dataImage});
           // dispatch({type: 'SET_UPLOAD_STATUS', value: true});
         }

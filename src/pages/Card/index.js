@@ -1,6 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import {ILProfile} from '../../assets';
+import {
+  ILProfile,
+  ICLanguage,
+  ICProfile,
+  ICHelp,
+  ICRate,
+  ICSignOut,
+} from '../../assets';
 import ItemListMenu from '../../components/moleculs/ItemListMenu';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,11 +16,16 @@ import {getData} from '../../utils';
 
 const Card = ({navigation}) => {
   const [open, setOpen] = useState(false);
-  const [profile, seProfile] = useState();
+  const [photo, setPhoto] = useState(ILProfile);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
 
   useEffect(() => {
+    getDataUser();
+    getPhotoUser();
+  }, []);
+
+  const getDataUser = () => {
     getData('user')
       .then((res) => {
         console.log(res);
@@ -23,7 +35,16 @@ const Card = ({navigation}) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
+
+  const getPhotoUser = () => {
+    getData('photo').then((res) => {
+      const data = res;
+      data.photo = {uri: res.photo};
+      setPhoto(res);
+      console.log(res);
+    });
+  };
 
   const onModal = () => {
     setOpen(true);
@@ -49,7 +70,7 @@ const Card = ({navigation}) => {
             activeOpacity={0.7}
             style={styles.borderPhoto}
             onPress={() => {}}>
-            <Image source={ILProfile} style={styles.photoContainer} />
+            <Image source={photo} style={styles.photoContainer} />
           </TouchableOpacity>
           <Text style={styles.name}>{fullName}</Text>
           <Text style={styles.email}>{email}</Text>
@@ -58,14 +79,28 @@ const Card = ({navigation}) => {
           <ItemListMenu
             label="Edit Profile"
             subTitle="Name, Address & Password"
+            icon={<ICProfile />}
           />
-          <ItemListMenu label="Language" subTitle="Avaible 3 Languages" />
-          <ItemListMenu label="Rate App" subTitle="On Google Play Store" />
-          <ItemListMenu label="Help Center" subTitle="Read our guidelines" />
+          <ItemListMenu
+            label="Language"
+            subTitle="Avaible 3 Languages"
+            icon={<ICLanguage />}
+          />
+          <ItemListMenu
+            label="Rate App"
+            subTitle="On Google Play Store"
+            icon={<ICRate />}
+          />
+          <ItemListMenu
+            label="Help Center"
+            subTitle="Read our guidelines"
+            icon={<ICHelp />}
+          />
           <ItemListMenu
             label="Sign Out"
             subTitle="Sign Out"
             onPress={onModal}
+            icon={<ICSignOut />}
           />
         </View>
       </View>

@@ -6,7 +6,7 @@ import {getData} from '../../../utils';
 const HomeProfile = () => {
   const [profile, setProfile] = useState(ILProfile);
   useEffect(() => {
-    getData('user').then((res) => {
+    getData('photo').then((res) => {
       const data = res;
       data.photo = {uri: res.photo};
       setProfile(res);

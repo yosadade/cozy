@@ -20,6 +20,11 @@ import ICGoogle from './google.svg';
 import ICFacebook from './facebook.svg';
 import ICSend from './send.svg';
 import ICSendActive from './send_active.svg';
+import ICProfile from './profile.svg';
+import ICLanguage from './language.svg';
+import ICRate from './rate.svg';
+import ICHelp from './help.svg';
+import ICSignOut from './signout.svg';
 
 export {
   ICLogo,
@@ -44,4 +49,9 @@ export {
   ICFacebook,
   ICSend,
   ICSendActive,
+  ICProfile,
+  ICLanguage,
+  ICRate,
+  ICHelp,
+  ICSignOut,
 };

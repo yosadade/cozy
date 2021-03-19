@@ -59,20 +59,18 @@ const SignIn = ({navigation}) => {
         })
         .catch((error) => {
           dispatch({type: 'SET_LOADING', value: true});
-          if (error.code === 'auth/email-already-in-use') {
+          if (error.message === 'auth/user-not-found') {
+            dispatch({type: 'SET_LOADING', value: false});
+            showError('That email address is invalid!');
+          } else if (error.code === 'auth/email-already-in-use') {
             dispatch({type: 'SET_LOADING', value: false});
             showError('That email address is already in use!');
-          }
-          if (error.code === 'auth/invalid-email') {
+          } else if (error.code === 'auth/invalid-email') {
             dispatch({type: 'SET_LOADING', value: false});
 
             showError('That email address is invalid!');
           }
-          if (error.code === 'auth/user-not-found') {
-            dispatch({type: 'SET_LOADING', value: false});
-            showError('That email address is invalid!');
-          }
-          console.error(error);
+          console.error(error.message);
         });
     }
   };
