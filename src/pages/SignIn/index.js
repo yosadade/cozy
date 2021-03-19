@@ -11,7 +11,7 @@ import {LoginManager, AccessToken} from 'react-native-fbsdk';
 
 import {Gap, TextInput, Button, Link} from '../../components';
 import {ICFacebook, ICGoogle} from '../../assets';
-import {useForm, storeData, showMessage} from '../../utils';
+import {useForm, storeData, showMessage, showError} from '../../utils';
 import {useDispatch} from 'react-redux';
 
 const SignIn = ({navigation}) => {
@@ -33,24 +33,48 @@ const SignIn = ({navigation}) => {
 
   const onSignIn = () => {
     dispatch({type: 'SET_LOADING', value: true});
-    auth()
-      .signInWithEmailAndPassword(form.email, form.password)
-      .then((res) => {
-        dispatch({type: 'SET_LOADING', value: false});
-        database()
-          .ref(`users/${res.user.uid}/`)
-          .once('value')
-          .then((resDB) => {
-            if (resDB.val()) {
-              storeData('user', resDB.val());
-              navigation.replace('MainApp');
-            }
-          });
-      })
-      .catch((err) => {
-        dispatch({type: 'SET_LOADING', value: false});
-        showMessage(err);
-      });
+    if (form.email.length === 0 && form.password.length === 0) {
+      dispatch({type: 'SET_LOADING', value: false});
+      showError('Please enter your email and password');
+    } else if (form.email.length === 0) {
+      dispatch({type: 'SET_LOADING', value: false});
+      showError('Please enter your email');
+    } else if (form.password.length === 0) {
+      dispatch({type: 'SET_LOADING', value: false});
+      showError('Please enter your password');
+    } else {
+      auth()
+        .signInWithEmailAndPassword(form.email, form.password)
+        .then((res) => {
+          dispatch({type: 'SET_LOADING', value: false});
+          database()
+            .ref(`users/${res.user.uid}/`)
+            .once('value')
+            .then((resDB) => {
+              if (resDB.val()) {
+                storeData('user', resDB.val());
+                navigation.replace('MainApp');
+              }
+            });
+        })
+        .catch((error) => {
+          dispatch({type: 'SET_LOADING', value: true});
+          if (error.code === 'auth/email-already-in-use') {
+            dispatch({type: 'SET_LOADING', value: false});
+            showError('That email address is already in use!');
+          }
+          if (error.code === 'auth/invalid-email') {
+            dispatch({type: 'SET_LOADING', value: false});
+
+            showError('That email address is invalid!');
+          }
+          if (error.code === 'auth/user-not-found') {
+            dispatch({type: 'SET_LOADING', value: false});
+            showError('That email address is invalid!');
+          }
+          console.error(error);
+        });
+    }
   };
 
   const onFacebook = async () => {
