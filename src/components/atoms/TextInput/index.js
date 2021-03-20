@@ -2,7 +2,13 @@ import React, {useState} from 'react';
 import {StyleSheet, View, TextInput as TextInputRN} from 'react-native';
 import Label from '../Label';
 
-const TextInput = ({placeholder, title, ...restProps}) => {
+const TextInput = ({
+  placeholder,
+  title,
+  disable,
+  secureTextEntry,
+  ...restProps
+}) => {
   const [border, setBorder] = useState('#FFFFFF');
 
   const onFocus = () => {
@@ -18,6 +24,8 @@ const TextInput = ({placeholder, title, ...restProps}) => {
       <Label title={title} />
       <TextInputRN
         {...restProps}
+        editable={!disable}
+        secureTextEntry={secureTextEntry}
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder={placeholder}

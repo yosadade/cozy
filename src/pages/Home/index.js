@@ -1,5 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, ScrollView, Image, Alert} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  RefreshControl,
+} from 'react-native';
 import database from '@react-native-firebase/database';
 import {
   Gap,
@@ -23,14 +31,14 @@ import {
 const Home = ({navigation}) => {
   const [recommended, setRecommended] = useState([]);
   const [popularCities, setPopularCities] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     getPopularCities();
     getRecommendedPlace();
     // console.log(popularCities);
-  }, [getPopularCities]);
+  }, [getPopularCities, getRecommendedPlace]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getPopularCities = () => {
     database()
       .ref('kos_cities/')
@@ -72,9 +80,20 @@ const Home = ({navigation}) => {
       });
   };
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    getRecommendedPlace();
+    getPopularCities();
+    setRefreshing(false);
+  };
+
   return (
     <View style={styles.page}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <HomeProfile />
         <Gap height={30} />
         <Label title="Popular Cities" />

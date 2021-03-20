@@ -35,6 +35,7 @@ const SignUp = ({navigation}) => {
             fullName: form.fullName,
             email: form.email,
             password: form.password,
+            phoneNumber: form.phoneNumber,
             uid: success.user.uid,
           };
           database()

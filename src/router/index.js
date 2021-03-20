@@ -15,6 +15,7 @@ import {
   PopularCitiesDetail,
   Chatting,
   UploadPhoto,
+  UpdateProfile,
 } from '../pages';
 
 const Stack = createStackNavigator();
@@ -78,6 +79,11 @@ const Router = () => {
       <Stack.Screen
         name="UploadPhoto"
         component={UploadPhoto}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UpdateProfile"
+        component={UpdateProfile}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

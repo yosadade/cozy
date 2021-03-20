@@ -10,6 +10,7 @@ import SignUp from './SignUp';
 import PopularCitiesDetail from './PopularCitiesDetail';
 import Chatting from './Chatting';
 import UploadPhoto from './UploadPhoto';
+import UpdateProfile from './UpdateProfile';
 
 export {
   Splash,
@@ -24,4 +25,5 @@ export {
   PopularCitiesDetail,
   Chatting,
   UploadPhoto,
+  UpdateProfile,
 };

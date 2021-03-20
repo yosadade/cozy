@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {
@@ -23,7 +24,7 @@ const Card = ({navigation}) => {
   useEffect(() => {
     getDataUser();
     getPhotoUser();
-  }, []);
+  }, [getDataUser, getPhotoUser]);
 
   const getDataUser = () => {
     getData('user')
@@ -46,6 +47,10 @@ const Card = ({navigation}) => {
     });
   };
 
+  const onUpdateProfile = () => {
+    navigation.navigate('UpdateProfile');
+  };
+
   const onModal = () => {
     setOpen(true);
   };
@@ -66,12 +71,9 @@ const Card = ({navigation}) => {
     <>
       <View style={styles.page}>
         <View style={styles.photo}>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.borderPhoto}
-            onPress={() => {}}>
+          <View activeOpacity={0.7} style={styles.borderPhoto}>
             <Image source={photo} style={styles.photoContainer} />
-          </TouchableOpacity>
+          </View>
           <Text style={styles.name}>{fullName}</Text>
           <Text style={styles.email}>{email}</Text>
         </View>
@@ -79,6 +81,7 @@ const Card = ({navigation}) => {
           <ItemListMenu
             label="Edit Profile"
             subTitle="Name, Address & Password"
+            onPress={onUpdateProfile}
             icon={<ICProfile />}
           />
           <ItemListMenu
