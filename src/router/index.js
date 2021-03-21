@@ -16,6 +16,7 @@ import {
   Chatting,
   UploadPhoto,
   UpdateProfile,
+  ForgotPassword,
 } from '../pages';
 
 const Stack = createStackNavigator();
@@ -84,6 +85,11 @@ const Router = () => {
       <Stack.Screen
         name="UpdateProfile"
         component={UpdateProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

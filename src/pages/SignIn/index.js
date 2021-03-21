@@ -173,9 +173,9 @@ const SignIn = ({navigation}) => {
         <Gap height={30} />
         <Button title="Sign In" onPress={onSignIn} />
         <Link
-          title="Can't Login?"
+          title="Forgot Password?"
           titleBtn="Click Here"
-          onPress={() => navigation.replace('SignUp')}
+          onPress={() => navigation.navigate('ForgotPassword')}
         />
       </View>
       <View style={styles.footer}>

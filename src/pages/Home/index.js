@@ -17,16 +17,7 @@ import {
   TipsList,
   HomeProfile,
 } from '../../components';
-import {
-  ILGuidelines,
-  ILFairship,
-  IL1,
-  IL2,
-  IL3,
-  ILCity1,
-  ILCity2,
-  ILCity3,
-} from '../../assets';
+import {ILGuidelines, ILFairship, IL1, IL2, IL3} from '../../assets';
 
 const Home = ({navigation}) => {
   const [recommended, setRecommended] = useState([]);
@@ -37,7 +28,7 @@ const Home = ({navigation}) => {
     getPopularCities();
     getRecommendedPlace();
     // console.log(popularCities);
-  }, [getPopularCities, getRecommendedPlace]);
+  }, []);
 
   const getPopularCities = () => {
     database()
@@ -72,7 +63,7 @@ const Home = ({navigation}) => {
         //     data: oldData(key),
         //   });
         // });
-        setRecommended(res);
+        // setRecommended(res);
         console.log('res recomended', res);
       })
       .catch((err) => {

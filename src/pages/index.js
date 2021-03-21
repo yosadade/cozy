@@ -11,6 +11,7 @@ import PopularCitiesDetail from './PopularCitiesDetail';
 import Chatting from './Chatting';
 import UploadPhoto from './UploadPhoto';
 import UpdateProfile from './UpdateProfile';
+import ForgotPassword from './ForgotPassword';
 
 export {
   Splash,
@@ -26,4 +27,5 @@ export {
   Chatting,
   UploadPhoto,
   UpdateProfile,
+  ForgotPassword,
 };
