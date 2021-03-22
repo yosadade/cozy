@@ -1,30 +1,73 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ICLogo} from '../../assets';
-import {TextInput, Button, Gap, Link} from '../../components';
+import {TextInput, Button, Gap, Link, Modal} from '../../components';
+import {useDispatch} from 'react-redux';
+import auth from '@react-native-firebase/auth';
+import {useForm, showError} from '../../utils';
 
 const ForgotPassword = ({navigation}) => {
+  const [form, setForm] = useForm({email: ''});
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const dispatch = useDispatch();
+
+  const onProceed = () => {
+    dispatch({type: 'SET_LOADING', value: true});
+    auth()
+      .sendPasswordResetEmail(form.email)
+      .then((res) => {
+        console.log(res);
+        dispatch({type: 'SET_LOADING', value: false});
+        setIsModalVisible(true);
+        setForm('reset');
+      })
+      .catch((err) => {
+        dispatch({type: 'SET_LOADING', value: false});
+        showError(err.message);
+      });
+  };
+
+  const onToggleModal = () => {
+    setTimeout(() => {
+      navigation.replace('SignIn');
+    }, 500);
+  };
+
   return (
-    <View style={styles.page}>
-      <View style={styles.logo}>
-        <ICLogo />
-        <Text style={styles.titleLogo}>Cozy</Text>
+    <>
+      <View style={styles.page}>
+        <View style={styles.logo}>
+          <ICLogo />
+          <Text style={styles.titleLogo}>Cozy</Text>
+        </View>
+        <View>
+          <Text style={styles.title}>Forgot Password</Text>
+          <Text style={styles.subTitle}>
+            Enter your registered email below to receive password reset
+            instuction
+          </Text>
+          <TextInput
+            placeholder="Email Address"
+            value={form.email}
+            onChangeText={(value) => setForm('email', value)}
+          />
+          <Gap height={15} />
+          <Button title="Proceed" onPress={onProceed} />
+        </View>
+        <Link
+          title="Back to"
+          titleBtn="Login"
+          onPress={() => navigation.navigate('SignIn')}
+        />
       </View>
-      <View>
-        <Text style={styles.title}>Forgot Password</Text>
-        <Text style={styles.subTitle}>
-          Enter your registered email below to receive password reset instuction
-        </Text>
-        <TextInput placeholder="Email Address" />
-        <Gap height={15} />
-        <Button title="Proceed" />
-      </View>
-      <Link
-        title="Back to login"
-        titleBtn="Click Here"
-        onPress={() => navigation.navigate('SignIn')}
-      />
-    </View>
+      {isModalVisible && (
+        <Modal
+          type="forgot-password"
+          title="We're sending the link for verify your account. Please check your mailbox"
+          onPressRight={onToggleModal}
+        />
+      )}
+    </>
   );
 };
 

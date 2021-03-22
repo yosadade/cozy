@@ -2,24 +2,28 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button, Gap} from '../../atoms';
 
-const Modal = ({onPressLeft, onPressRight, title}) => {
+const Modal = ({type, onPressLeft, onPressRight, title}) => {
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.button}>
+          {type !== 'forgot-password' && (
+            <>
+              <Button
+                type="modal"
+                title="ya"
+                width={100}
+                backgroundColor="#F1F1F1"
+                color="#82868E"
+                onPress={onPressLeft}
+              />
+              <Gap width={10} />
+            </>
+          )}
           <Button
             type="modal"
-            title="ya"
-            width={100}
-            backgroundColor="#F1F1F1"
-            color="#82868E"
-            onPress={onPressLeft}
-          />
-          <Gap width={10} />
-          <Button
-            type="modal"
-            title="tidak"
+            title={type === 'forgot-password' ? 'Done' : 'tidak'}
             width={100}
             backgroundColor="#5843BE"
             color="#FFFFFF"
@@ -44,6 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 24,
   },
   title: {
     fontSize: 16,
