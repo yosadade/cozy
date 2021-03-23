@@ -103,11 +103,11 @@ const UpdateProfile = ({navigation}) => {
 
   const updateProfileData = () => {
     console.log(profile);
-    // const data = profile;
+    const data = profile;
     const photoForDB = photo;
     database()
       .ref(`users/${profile.uid}/`)
-      .update(profile)
+      .update(data)
       .then((res) => {
         storeData('user')
           .then(() => {

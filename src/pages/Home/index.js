@@ -55,15 +55,6 @@ const Home = ({navigation}) => {
       .limitToLast(3)
       .once('value')
       .then((res) => {
-        // const oldData = res.val();
-        // const data = [];
-        // Object.keys(oldData).map((key) => {
-        //   data.push({
-        //     id: key,
-        //     data: oldData(key),
-        //   });
-        // });
-        // setRecommended(res);
         console.log('res recomended', res);
       })
       .catch((err) => {

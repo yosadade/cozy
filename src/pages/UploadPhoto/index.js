@@ -6,7 +6,7 @@ import {Gap, Button, Link, Header} from '../../components';
 import {showError, storeData} from '../../utils';
 
 const UploadPhoto = ({route, navigation}) => {
-  const {fullName, email, uid} = route.params;
+  const {fullName, email, uid, password} = route.params;
   const [photo, setPhoto] = useState('');
 
   const uploadAndContinue = () => {
@@ -15,7 +15,14 @@ const UploadPhoto = ({route, navigation}) => {
       .update({photo: photo});
     storeData('photo', photo);
     console.log(photo);
-    navigation.replace('MainApp');
+    const data = {
+      fullName,
+      email,
+      password,
+      photo,
+    };
+    console.log(data);
+    navigation.replace('MainApp', data);
   };
 
   const onSkip = () => {
